@@ -1,0 +1,211 @@
+/*
+ * popup-everything popup-everything
+ * http://www.rommel.dk/Wordpress
+ *
+ * Copyright 2016 Rommel
+ * Contributers: mrommel, mathiasholmbo
+ * 
+ */
+@import 'fonts';
+// Icons usage - <span class="icon icon-*icon name*"></span>
+
+///////////////////
+// COLOR PALETTE //
+///////////////////
+$black:         #181818;
+$white:         #fefefe;
+$border-color:  darken(#ecf0f1, 10%);
+$label-box:     49px;
+
+.popup-everything {
+  position: fixed;
+  z-index: 100;
+  background-color: $white;
+  padding: 0 0 4px 0;
+  text-align: center;
+  left: 0;
+  border-right: 1px solid $border-color;
+  border-left: none;
+
+  h2.popup-everything-header {
+    margin: 0;
+    padding: 17px 0;
+    color: $white;
+    background: $black;
+    font-size: 13px;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+
+  form {
+    text-align: left;
+    textarea {
+      resize: vertical;
+      height: 80px;
+    }
+  }
+}
+
+// Initial state on the contact box inner is non display.
+.popup-everything-inner-wrap {
+  display: none;
+}
+
+.popup-everything-inner {
+  padding: 15px;
+}
+
+// Checkbox containing label for the activation.
+#popup-everything-checkbox {
+  ~ label {
+    right: -$label-box;
+  }
+  // When the user activates the button.
+  &:checked {
+    ~ label {
+      background: lighten($black, 10%);
+      .popup-everything-ico-phone:before {
+        content: "\e5cd"; // icon-close
+      }
+
+      // Display content
+      + .popup-everything-inner-wrap {
+        display: block;
+      }
+    }
+  }
+}
+
+// Toogle button for the content box.
+#popup-everything-checkbox-toggle {
+  background: $black;
+  color: $white;
+  font-size: 24px;
+  height: $label-box;
+  width: $label-box;
+  position: absolute;
+  line-height: $label-box+5;
+  margin: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.popup-everything-content,
+.popup-everything-phone_no,
+.popup-everything-email {
+  padding: 10px 0;
+}
+
+.popup-everything-phone_no,
+.popup-everything-email {
+  a {
+    display: block;
+  }
+  .popup-everything-ico {
+    font-size: 16px;
+
+    &:before {
+      margin-bottom: 4px;
+      display: block;
+      font-size: 24px;
+      color: $black;
+    }
+  }
+}
+
+// If positioned right
+.popup-everything-position-right {
+  left: auto;
+  right: 0;
+  border-right: none;
+  border-left: 1px solid $border-color;
+
+
+  // Checkbox containing label for the activation.
+  #popup-everything-checkbox {
+
+    ~ label {
+      right: auto;
+      left: -$label-box;
+    }
+
+    // When the user activates the button.
+    &:checked ~ label {
+      // icon-close.
+      .icon-phone:before { content: "\e5cd"; }
+    }
+  }
+}
+
+.popup-everything-social-list {
+  width: 100%;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+
+  // Clearfix.
+  &:before,
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+    *zoom: 1;
+  }
+
+  li {
+    float: left;
+    padding: inherit;
+    margin: inherit;
+    list-style-type: inherit;
+
+    a {
+      color: #fff;
+      height: 35px;
+      line-height: 35px;
+      font-size: 16px;
+      text-align: center;
+      display: block;
+    }
+  }
+
+  // Social icon layout columns.
+  &.active-count-1 li {
+    width: 100%;
+  }
+  &.active-count-2 li {
+    width: 50%;
+  }
+  &.active-count-3 li {
+    width: 33.33%;
+  }
+  &.active-count-4 li {
+    width: 25%;
+  }
+  &.active-count-5 li {
+    width: 20%;
+  }
+  &.active-count-6 li {
+    width: 16.66%;
+  }
+
+  // Get mixins
+  @import "compass/css3/box-shadow";
+
+  // Setup all the social items.
+  @mixin social_item( $color1 ) {
+    background: $color1;
+    @include box-shadow(0 4px 0 darken($color1, 15%));
+  }
+
+  .facebook a { @include social_item(#3c5a99); }
+  .linkedin a { @include social_item(#0976b4); }
+  .instagram a { @include social_item(#517fa4); }
+  .twitter a { @include social_item(#00b0ed); }
+  .googleplus a { @include social_item(#df4a32); }
+  .pinterest a { @include social_item(#cb2027); }
+}
